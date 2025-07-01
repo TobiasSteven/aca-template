@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-sidebar",
+    "version": "1.0.0",
+    "title": "Contact - Barre latérale",
+    "category": "mon-theme-aca",
+    "icon": "info",
+    "description": "Barre latérale avec informations de contact rapide, départements et réseaux sociaux.",
+    "keywords": ["contact", "sidebar", "informations"],
+    "supports": {
+        "html": false
+    },
+    "attributes": {
+        "quickContactTitle": {
+            "type": "string",
+            "default": "Contact Rapide"
+        },
+        "phone": {
+            "type": "string",
+            "default": "+225 27 20 30 40 50"
+        },
+        "email": {
+            "type": "string",
+            "default": "contact@aca-coton.org"
+        },
+        "hours": {
+            "type": "string",
+            "default": "Lun-Ven: 8h00-17h00"
+        },
+        "departmentsTitle": {
+            "type": "string",
+            "default": "Contacts Spécialisés"
+        },
+        "departments": {
+            "type": "array",
+            "default": [
+                {
+                    "name": "Direction Générale",
+                    "email": "direction@aca-coton.org",
+                    "phone": "+225 27 20 30 40 51",
+                    "description": "Questions stratégiques et partenariats institutionnels"
+                },
+                {
+                    "name": "Développement des Membres",
+                    "email": "membres@aca-coton.org",
+                    "phone": "+225 27 20 30 40 52",
+                    "description": "Adhésions, services aux membres, networking"
+                },
+                {
+                    "name": "Programmes Techniques",
+                    "email": "technique@aca-coton.org",
+                    "phone": "+225 27 20 30 40 53",
+                    "description": "Formation, certification, assistance technique"
+                },
+                {
+                    "name": "Communication",
+                    "email": "communication@aca-coton.org",
+                    "phone": "+225 27 20 30 40 54",
+                    "description": "Presse, événements, publications"
+                }
+            ]
+        },
+        "socialTitle": {
+            "type": "string",
+            "default": "Suivez-nous"
+        },
+        "socialSubtitle": {
+            "type": "string",
+            "default": "Restez connecté avec l'ACA sur les réseaux sociaux"
+        },
+        "facebookUrl": {
+            "type": "string",
+            "default": "#"
+        },
+        "twitterUrl": {
+            "type": "string",
+            "default": "#"
+        },
+        "linkedinUrl": {
+            "type": "string",
+            "default": "#"
+        },
+        "youtubeUrl": {
+            "type": "string",
+            "default": "#"
+        },
+        "quickContactBgColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "departmentsBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "socialBgColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-hero",
+    "version": "1.0.0",
+    "title": "Contact - Hero Section",
+    "category": "mon-theme-aca",
+    "icon": "megaphone",
+    "description": "Section d'en-tête pour la page contact avec titre et informations de contact rapides.",
+    "keywords": ["contact", "hero", "en-tête"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Contactez-nous"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "Notre équipe est à votre disposition pour répondre à vos questions et vous accompagner dans vos projets cotonniers"
+        },
+        "phone": {
+            "type": "string",
+            "default": "+225 27 20 30 40 50"
+        },
+        "email": {
+            "type": "string",
+            "default": "contact@aca-coton.org"
+        },
+        "hours": {
+            "type": "string",
+            "default": "Lun-Ven: 8h00-17h00"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "accentColor": {
+            "type": "string",
+            "default": "#A8E6CF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-form",
+    "version": "1.0.0",
+    "title": "Contact - Formulaire",
+    "category": "mon-theme-aca",
+    "icon": "feedback",
+    "description": "Formulaire de contact personnalisable avec options avancées.",
+    "keywords": ["contact", "formulaire", "email"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Envoyez-nous un message"
+        },
+        "formId": {
+            "type": "string",
+            "default": "contact-form"
+        },
+        "recipientEmail": {
+            "type": "string",
+            "default": "contact@example.com"
+        },
+        "successMessage": {
+            "type": "string",
+            "default": "Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais."
+        },
+        "errorMessage": {
+            "type": "string",
+            "default": "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer."
+        },
+        "showOrganizationField": {
+            "type": "boolean",
+            "default": true
+        },
+        "showContactReasonField": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPreferredContactField": {
+            "type": "boolean",
+            "default": true
+        },
+        "contactReasons": {
+            "type": "array",
+            "default": [
+                "Demande d'adhésion",
+                "Partenariat commercial",
+                "Collaboration technique",
+                "Demande d'information",
+                "Support technique",
+                "Presse et médias",
+                "Autre"
+            ]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "buttonColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "buttonTextColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}

@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-success",
+    "version": "1.0.0",
+    "title": "Contact - Message de succès",
+    "category": "mon-theme-aca",
+    "icon": "yes-alt",
+    "description": "Affiche un message de confirmation après l'envoi d'un formulaire de contact.",
+    "keywords": ["contact", "succès", "confirmation", "formulaire"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Message envoyé avec succès !"
+        },
+        "message": {
+            "type": "string",
+            "default": "Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais, généralement sous 24 heures."
+        },
+        "newMessageButtonText": {
+            "type": "string",
+            "default": "Envoyer un autre message"
+        },
+        "homeButtonText": {
+            "type": "string",
+            "default": "Retour à l'accueil"
+        },
+        "homeButtonUrl": {
+            "type": "string",
+            "default": "/"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "cardBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "messageColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "iconColor": {
+            "type": "string",
+            "default": "#28A745"
+        },
+        "primaryButtonBgColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "primaryButtonTextColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "secondaryButtonBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "secondaryButtonTextColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "secondaryButtonBorderColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

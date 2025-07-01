@@ -4,7 +4,7 @@
     "description": "Un thème WordPress modulable avec des blocs personnalisés",
     "main": "index.js",
     "scripts": {
-        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build && wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build && wp-scripts build blocks/recent-news/index.js --output-path=blocks/recent-news/build && wp-scripts build blocks/nos-missions/index.js --output-path=blocks/nos-missions/build && wp-scripts build blocks/events/index.js --output-path=blocks/events/build && wp-scripts build blocks/testimonials/index.js --output-path=blocks/testimonials/build && wp-scripts build blocks/partners/index.js --output-path=blocks/partners/build && wp-scripts build blocks/featured-post/index.js --output-path=blocks/featured-post/build && wp-scripts build blocks/filtered-posts/index.js --output-path=blocks/filtered-posts/build && wp-scripts build blocks/timeline/index.js --output-path=blocks/timeline/build",
+        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build && wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build && wp-scripts build blocks/recent-news/index.js --output-path=blocks/recent-news/build && wp-scripts build blocks/nos-missions/index.js --output-path=blocks/nos-missions/build && wp-scripts build blocks/events/index.js --output-path=blocks/events/build && wp-scripts build blocks/testimonials/index.js --output-path=blocks/testimonials/build && wp-scripts build blocks/partners/index.js --output-path=blocks/partners/build && wp-scripts build blocks/featured-post/index.js --output-path=blocks/featured-post/build && wp-scripts build blocks/filtered-posts/index.js --output-path=blocks/filtered-posts/build && wp-scripts build blocks/timeline/index.js --output-path=blocks/timeline/build && wp-scripts build blocks/contact-hero/index.js --output-path=blocks/contact-hero/build && wp-scripts build blocks/contact-form/index.js --output-path=blocks/contact-form/build && wp-scripts build blocks/contact-sidebar/index.js --output-path=blocks/contact-sidebar/build && wp-scripts build blocks/contact-offices/index.js --output-path=blocks/contact-offices/build && wp-scripts build blocks/contact-map/index.js --output-path=blocks/contact-map/build && wp-scripts build blocks/contact-success/index.js --output-path=blocks/contact-success/build",
         "start": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
         "dev": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
         "build:hero-slider": "wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build",
@@ -25,6 +25,18 @@
         "start:filtered-posts": "wp-scripts start blocks/filtered-posts/index.js --output-path=blocks/filtered-posts/build",
         "build:timeline": "wp-scripts build blocks/timeline/index.js --output-path=blocks/timeline/build",
         "start:timeline": "wp-scripts start blocks/timeline/index.js --output-path=blocks/timeline/build",
+        "build:contact-hero": "wp-scripts build blocks/contact-hero/index.js --output-path=blocks/contact-hero/build",
+        "start:contact-hero": "wp-scripts start blocks/contact-hero/index.js --output-path=blocks/contact-hero/build",
+        "build:contact-form": "wp-scripts build blocks/contact-form/index.js --output-path=blocks/contact-form/build",
+        "start:contact-form": "wp-scripts start blocks/contact-form/index.js --output-path=blocks/contact-form/build",
+        "build:contact-sidebar": "wp-scripts build blocks/contact-sidebar/index.js --output-path=blocks/contact-sidebar/build",
+        "start:contact-sidebar": "wp-scripts start blocks/contact-sidebar/index.js --output-path=blocks/contact-sidebar/build",
+        "build:contact-offices": "wp-scripts build blocks/contact-offices/index.js --output-path=blocks/contact-offices/build",
+        "start:contact-offices": "wp-scripts start blocks/contact-offices/index.js --output-path=blocks/contact-offices/build",
+        "build:contact-map": "wp-scripts build blocks/contact-map/index.js --output-path=blocks/contact-map/build",
+        "start:contact-map": "wp-scripts start blocks/contact-map/index.js --output-path=blocks/contact-map/build",
+        "build:contact-success": "wp-scripts build blocks/contact-success/index.js --output-path=blocks/contact-success/build",
+        "start:contact-success": "wp-scripts start blocks/contact-success/index.js --output-path=blocks/contact-success/build",
         "build:all": "npm run build"
     },
     "devDependencies": {

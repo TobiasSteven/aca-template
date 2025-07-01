@@ -1,0 +1,73 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-map",
+    "version": "1.0.0",
+    "title": "Contact - Carte",
+    "category": "mon-theme-aca",
+    "icon": "location",
+    "description": "Affiche une carte avec l'emplacement de l'organisation.",
+    "keywords": ["contact", "carte", "map", "localisation"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Nous Localiser"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "Siège social - Abidjan, Côte d'Ivoire"
+        },
+        "address": {
+            "type": "string",
+            "default": "123 Avenue de l'Indépendance, Plateau, Abidjan, Côte d'Ivoire"
+        },
+        "mapUrl": {
+            "type": "string",
+            "default": "https://www.google.com/maps/place/Abidjan,+C%C3%B4te+d%27Ivoire/"
+        },
+        "buttonText": {
+            "type": "string",
+            "default": "Voir sur Google Maps"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "subtitleColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "mapBgColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "mapGradientStart": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "mapGradientEnd": {
+            "type": "string",
+            "default": "#A8E6CF"
+        },
+        "buttonBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "buttonTextColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

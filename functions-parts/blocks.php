@@ -43,6 +43,14 @@ function mon_theme_aca_register_blocks()
     
     // Enregistrer le bloc timeline
     register_block_type(get_template_directory() . '/blocks/timeline');
+    
+    // Enregistrer les blocs de contact
+    register_block_type(get_template_directory() . '/blocks/contact-hero');
+    register_block_type(get_template_directory() . '/blocks/contact-form');
+    register_block_type(get_template_directory() . '/blocks/contact-sidebar');
+    register_block_type(get_template_directory() . '/blocks/contact-offices');
+    register_block_type(get_template_directory() . '/blocks/contact-map');
+    register_block_type(get_template_directory() . '/blocks/contact-success');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -108,6 +116,27 @@ function mon_theme_aca_enqueue_block_assets()
             filemtime(get_template_directory() . '/blocks/timeline/style-index.css')
         );
     }
+    
+    // S'assurer que les styles des blocs de contact sont chargés
+    $contact_blocks = [
+        'contact-hero',
+        'contact-form',
+        'contact-sidebar',
+        'contact-offices',
+        'contact-map',
+        'contact-success'
+    ];
+    
+    foreach ($contact_blocks as $block) {
+        if (has_block('mon-theme-aca/' . $block)) {
+            wp_enqueue_style(
+                'mon-theme-aca-' . $block . '-style',
+                get_template_directory_uri() . '/blocks/' . $block . '/style-index.css',
+                array(),
+                filemtime(get_template_directory() . '/blocks/' . $block . '/style-index.css')
+            );
+        }
+    }
 
     // Enqueue des scripts JavaScript pour les blocs
     if (has_block('mon-theme-aca/events')) {
@@ -157,6 +186,27 @@ function mon_theme_aca_enqueue_block_assets()
             array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('filtered_posts_nonce'),
+            )
+        );
+    }
+    
+    // Enqueue des scripts pour le bloc contact-form
+    if (has_block('mon-theme-aca/contact-form')) {
+        wp_enqueue_script(
+            'mon-theme-aca-contact-form-view',
+            get_template_directory_uri() . '/blocks/contact-form/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/contact-form/view.js'),
+            true
+        );
+
+        // Localiser le script avec les données AJAX
+        wp_localize_script(
+            'mon-theme-aca-contact-form-view',
+            'contactFormData',
+            array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('contact_form_nonce'),
             )
         );
     }
@@ -266,6 +316,49 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/timeline/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/timeline/style-index.css')
+        );
+    }
+    
+    // Enqueue forcé des styles des blocs de contact
+    $contact_blocks = [
+        'contact-hero',
+        'contact-form',
+        'contact-sidebar',
+        'contact-offices',
+        'contact-map',
+        'contact-success'
+    ];
+    
+    foreach ($contact_blocks as $block) {
+        $style_path = get_template_directory() . '/blocks/' . $block . '/style-index.css';
+        if (file_exists($style_path)) {
+            wp_enqueue_style(
+                'mon-theme-aca-' . $block . '-frontend',
+                get_template_directory_uri() . '/blocks/' . $block . '/style-index.css',
+                array(),
+                filemtime($style_path)
+            );
+        }
+    }
+    
+    // Enqueue forcé du script JavaScript du block contact-form
+    if (file_exists(get_template_directory() . '/blocks/contact-form/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-contact-form-view-js',
+            get_template_directory_uri() . '/blocks/contact-form/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/contact-form/view.js'),
+            true
+        );
+        
+        // Localiser le script avec les données AJAX
+        wp_localize_script(
+            'mon-theme-aca-contact-form-view-js',
+            'contactFormData',
+            array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('contact_form_nonce'),
+            )
         );
     }
 }
@@ -458,6 +551,107 @@ function mon_theme_aca_filtered_posts_ajax_handler()
 // Enregistrer les handlers AJAX
 add_action('wp_ajax_filtered_posts_ajax', 'mon_theme_aca_filtered_posts_ajax_handler');
 add_action('wp_ajax_nopriv_filtered_posts_ajax', 'mon_theme_aca_filtered_posts_ajax_handler');
+
+/**
+ * AJAX handler for contact form
+ */
+function mon_theme_aca_contact_form_submit()
+{
+    // Nettoyer tout output buffer pour éviter les fuites HTML
+    if (ob_get_level()) {
+        ob_clean();
+    }
+
+    // Vérifier le nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'contact_form_nonce')) {
+        wp_send_json_error([
+            'message' => __('Erreur de sécurité. Veuillez rafraîchir la page et réessayer.', 'mon-theme-aca')
+        ]);
+        return;
+    }
+
+    // Récupérer les données du formulaire
+    $form_id = sanitize_text_field($_POST['form_id'] ?? '');
+    $first_name = sanitize_text_field($_POST['firstName'] ?? '');
+    $last_name = sanitize_text_field($_POST['lastName'] ?? '');
+    $email = sanitize_email($_POST['email'] ?? '');
+    $phone = sanitize_text_field($_POST['phone'] ?? '');
+    $organization = sanitize_text_field($_POST['organization'] ?? '');
+    $contact_reason = sanitize_text_field($_POST['contactReason'] ?? '');
+    $subject = sanitize_text_field($_POST['subject'] ?? '');
+    $message = sanitize_textarea_field($_POST['message'] ?? '');
+    $preferred_contact = sanitize_text_field($_POST['preferredContact'] ?? 'email');
+
+    // Validation des champs obligatoires
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($subject) || empty($message)) {
+        wp_send_json_error([
+            'message' => __('Veuillez remplir tous les champs obligatoires.', 'mon-theme-aca')
+        ]);
+        return;
+    }
+
+    // Validation de l'email
+    if (!is_email($email)) {
+        wp_send_json_error([
+            'message' => __('Veuillez entrer une adresse email valide.', 'mon-theme-aca')
+        ]);
+        return;
+    }
+
+    // Récupérer l'email destinataire depuis les options du bloc
+    $recipient_email = get_option('contact_form_recipient_' . $form_id, get_option('admin_email'));
+
+    // Construire le message
+    $email_subject = sprintf(__('[Contact] %s', 'mon-theme-aca'), $subject);
+    
+    $email_body = sprintf(__('Nom: %s %s', 'mon-theme-aca'), $first_name, $last_name) . "\r\n\r\n";
+    $email_body .= sprintf(__('Email: %s', 'mon-theme-aca'), $email) . "\r\n";
+    
+    if (!empty($phone)) {
+        $email_body .= sprintf(__('Téléphone: %s', 'mon-theme-aca'), $phone) . "\r\n";
+    }
+    
+    if (!empty($organization)) {
+        $email_body .= sprintf(__('Organisation: %s', 'mon-theme-aca'), $organization) . "\r\n";
+    }
+    
+    if (!empty($contact_reason)) {
+        $email_body .= sprintf(__('Motif de contact: %s', 'mon-theme-aca'), $contact_reason) . "\r\n";
+    }
+    
+    $email_body .= sprintf(__('Méthode de contact préférée: %s', 'mon-theme-aca'), $preferred_contact) . "\r\n\r\n";
+    $email_body .= __('Message:', 'mon-theme-aca') . "\r\n" . $message;
+
+    // En-têtes de l'email
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: ' . $first_name . ' ' . $last_name . ' <' . $email . '>',
+        'Reply-To: ' . $email
+    );
+
+    // Envoyer l'email
+    $sent = wp_mail($recipient_email, $email_subject, $email_body, $headers);
+
+    if ($sent) {
+        // Récupérer le message de succès depuis les options du bloc
+        $success_message = get_option('contact_form_success_' . $form_id, __('Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais.', 'mon-theme-aca'));
+        
+        wp_send_json_success([
+            'message' => $success_message
+        ]);
+    } else {
+        // Récupérer le message d'erreur depuis les options du bloc
+        $error_message = get_option('contact_form_error_' . $form_id, __('Une erreur s\'est produite lors de l\'envoi du message. Veuillez réessayer.', 'mon-theme-aca'));
+        
+        wp_send_json_error([
+            'message' => $error_message
+        ]);
+    }
+}
+
+// Enregistrer les handlers AJAX pour le formulaire de contact
+add_action('wp_ajax_contact_form_submit', 'mon_theme_aca_contact_form_submit');
+add_action('wp_ajax_nopriv_contact_form_submit', 'mon_theme_aca_contact_form_submit');
 
 /**
  * Fonction helper pour rendre la pagination avec page courante

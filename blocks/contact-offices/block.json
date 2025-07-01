@@ -1,0 +1,94 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/contact-offices",
+    "version": "1.0.0",
+    "title": "Contact - Bureaux",
+    "category": "mon-theme-aca",
+    "icon": "building",
+    "description": "Affiche les bureaux de l'organisation avec leurs coordonnées.",
+    "keywords": ["contact", "bureaux", "adresses", "localisation"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Nos Bureaux"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "L'ACA dispose de plusieurs bureaux à travers l'Afrique pour mieux vous servir"
+        },
+        "offices": {
+            "type": "array",
+            "default": [
+                {
+                    "id": 1,
+                    "name": "Siège Social",
+                    "city": "Abidjan",
+                    "country": "Côte d'Ivoire",
+                    "address": "123 Avenue de l'Indépendance, Plateau",
+                    "postalCode": "BP 1234, Abidjan 01",
+                    "phone": "+225 27 20 30 40 50",
+                    "email": "contact@aca-coton.org",
+                    "hours": "Lun-Ven: 8h00-17h00",
+                    "isMain": true
+                },
+                {
+                    "id": 2,
+                    "name": "Bureau Régional Ouest",
+                    "city": "Dakar",
+                    "country": "Sénégal",
+                    "address": "45 Rue de la République, Dakar",
+                    "postalCode": "BP 5678, Dakar",
+                    "phone": "+221 33 824 50 60",
+                    "email": "dakar@aca-coton.org",
+                    "hours": "Lun-Ven: 8h30-17h30",
+                    "isMain": false
+                },
+                {
+                    "id": 3,
+                    "name": "Bureau Régional Centre",
+                    "city": "Ouagadougou",
+                    "country": "Burkina Faso",
+                    "address": "78 Avenue Kwame Nkrumah, Ouaga 2000",
+                    "postalCode": "BP 9012, Ouagadougou",
+                    "phone": "+226 25 30 40 50",
+                    "email": "ouagadougou@aca-coton.org",
+                    "hours": "Lun-Ven: 8h00-17h00",
+                    "isMain": false
+                }
+            ]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "subtitleColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "cardBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "mainOfficeColor": {
+            "type": "string",
+            "default": "#28A745"
+        },
+        "regularOfficeColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}
