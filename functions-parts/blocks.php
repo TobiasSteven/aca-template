@@ -51,6 +51,13 @@ function mon_theme_aca_register_blocks()
     register_block_type(get_template_directory() . '/blocks/contact-offices');
     register_block_type(get_template_directory() . '/blocks/contact-map');
     register_block_type(get_template_directory() . '/blocks/contact-success');
+    
+    // Enregistrer les blocs de publications
+    register_block_type(get_template_directory() . '/blocks/publications-hero');
+    register_block_type(get_template_directory() . '/blocks/publications-tabs');
+    register_block_type(get_template_directory() . '/blocks/publications-collections');
+    register_block_type(get_template_directory() . '/blocks/publications-grid');
+    register_block_type(get_template_directory() . '/blocks/publications-modal');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -107,16 +114,6 @@ function mon_theme_aca_enqueue_block_assets()
         );
     }
     
-    // S'assurer que les styles du block timeline sont chargés
-    if (has_block('mon-theme-aca/timeline')) {
-        wp_enqueue_style(
-            'mon-theme-aca-timeline-style',
-            get_template_directory_uri() . '/blocks/timeline/style-index.css',
-            array(),
-            filemtime(get_template_directory() . '/blocks/timeline/style-index.css')
-        );
-    }
-    
     // S'assurer que les styles des blocs de contact sont chargés
     $contact_blocks = [
         'contact-hero',
@@ -128,6 +125,26 @@ function mon_theme_aca_enqueue_block_assets()
     ];
     
     foreach ($contact_blocks as $block) {
+        if (has_block('mon-theme-aca/' . $block)) {
+            wp_enqueue_style(
+                'mon-theme-aca-' . $block . '-style',
+                get_template_directory_uri() . '/blocks/' . $block . '/style-index.css',
+                array(),
+                filemtime(get_template_directory() . '/blocks/' . $block . '/style-index.css')
+            );
+        }
+    }
+    
+    // S'assurer que les styles des blocs de publications sont chargés
+    $publications_blocks = [
+        'publications-hero',
+        'publications-tabs',
+        'publications-collections',
+        'publications-grid',
+        'publications-modal'
+    ];
+    
+    foreach ($publications_blocks as $block) {
         if (has_block('mon-theme-aca/' . $block)) {
             wp_enqueue_style(
                 'mon-theme-aca-' . $block . '-style',
@@ -208,6 +225,27 @@ function mon_theme_aca_enqueue_block_assets()
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('contact_form_nonce'),
             )
+        );
+    }
+    
+    // Enqueue des scripts pour les blocs de publications
+    if (has_block('mon-theme-aca/publications-grid') || has_block('mon-theme-aca/publications-modal')) {
+        wp_enqueue_script(
+            'mon-theme-aca-publications-view',
+            get_template_directory_uri() . '/blocks/publications-grid/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/publications-grid/view.js'),
+            true
+        );
+    }
+    
+    if (has_block('mon-theme-aca/publications-tabs')) {
+        wp_enqueue_script(
+            'mon-theme-aca-publications-tabs-view',
+            get_template_directory_uri() . '/blocks/publications-tabs/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/publications-tabs/view.js'),
+            true
         );
     }
 }
@@ -359,6 +397,48 @@ function mon_theme_aca_force_block_styles()
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('contact_form_nonce'),
             )
+        );
+    }
+    
+    // Enqueue forcé des styles des blocs de publications
+    $publications_blocks = [
+        'publications-hero',
+        'publications-tabs',
+        'publications-collections',
+        'publications-grid',
+        'publications-modal'
+    ];
+    
+    foreach ($publications_blocks as $block) {
+        $style_path = get_template_directory() . '/blocks/' . $block . '/style-index.css';
+        if (file_exists($style_path)) {
+            wp_enqueue_style(
+                'mon-theme-aca-' . $block . '-frontend',
+                get_template_directory_uri() . '/blocks/' . $block . '/style-index.css',
+                array(),
+                filemtime($style_path)
+            );
+        }
+    }
+    
+    // Enqueue forcé des scripts JavaScript des blocs de publications
+    if (file_exists(get_template_directory() . '/blocks/publications-grid/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-publications-view-js',
+            get_template_directory_uri() . '/blocks/publications-grid/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/publications-grid/view.js'),
+            true
+        );
+    }
+    
+    if (file_exists(get_template_directory() . '/blocks/publications-tabs/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-publications-tabs-view-js',
+            get_template_directory_uri() . '/blocks/publications-tabs/view.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/blocks/publications-tabs/view.js'),
+            true
         );
     }
 }
@@ -654,6 +734,135 @@ add_action('wp_ajax_contact_form_submit', 'mon_theme_aca_contact_form_submit');
 add_action('wp_ajax_nopriv_contact_form_submit', 'mon_theme_aca_contact_form_submit');
 
 /**
+ * AJAX handler for publications filtering
+ */
+function mon_theme_aca_publications_filter_handler() {
+    // Nettoyer tout output buffer pour éviter les fuites HTML
+    if (ob_get_level()) {
+        ob_clean();
+    }
+
+    // Vérifier le nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'publications_filter_nonce')) {
+        wp_send_json_error([
+            'message' => __('Erreur de sécurité. Veuillez rafraîchir la page et réessayer.', 'mon-theme-aca')
+        ]);
+        return;
+    }
+
+    // Récupérer les paramètres
+    $search = sanitize_text_field($_POST['search'] ?? '');
+    $types = isset($_POST['types']) ? array_map('sanitize_text_field', $_POST['types']) : [];
+    $themes = isset($_POST['themes']) ? array_map('sanitize_text_field', $_POST['themes']) : [];
+    $languages = isset($_POST['languages']) ? array_map('sanitize_text_field', $_POST['languages']) : [];
+    $levels = isset($_POST['levels']) ? array_map('sanitize_text_field', $_POST['levels']) : [];
+    $sort_by = sanitize_text_field($_POST['sortBy'] ?? 'date');
+    $sort_order = sanitize_text_field($_POST['sortOrder'] ?? 'desc');
+    $view_mode = sanitize_text_field($_POST['viewMode'] ?? 'grid');
+    $page = intval($_POST['page'] ?? 1);
+    $per_page = intval($_POST['perPage'] ?? 9);
+    $active_tab = sanitize_text_field($_POST['activeTab'] ?? 'tous');
+
+    // Récupérer les publications depuis les attributs du bloc
+    $block_id = sanitize_text_field($_POST['blockId'] ?? '');
+    $publications = get_option('publications_data_' . $block_id, []);
+
+    // Filtrer les publications
+    $filtered_publications = array_filter($publications, function($pub) use ($search, $types, $themes, $languages, $levels, $active_tab) {
+        // Filtrer par recherche
+        if (!empty($search)) {
+            $search_in = strtolower($pub['title'] . ' ' . $pub['description'] . ' ' . $pub['author']);
+            if (strpos($search_in, strtolower($search)) === false) {
+                return false;
+            }
+        }
+        
+        // Filtrer par type
+        if (!empty($types) && !in_array($pub['type'], $types)) {
+            return false;
+        }
+        
+        // Filtrer par thème
+        if (!empty($themes) && !in_array($pub['theme'], $themes)) {
+            return false;
+        }
+        
+        // Filtrer par langue
+        if (!empty($languages) && !in_array($pub['language'], $languages)) {
+            return false;
+        }
+        
+        // Filtrer par niveau
+        if (!empty($levels) && !in_array($pub['level'], $levels)) {
+            return false;
+        }
+        
+        // Filtrer par onglet
+        if ($active_tab !== 'tous') {
+            $tab_mapping = [
+                'rapports' => ['Rapport'],
+                'guides' => ['Guide'],
+                'bulletins' => ['Bulletin'],
+                'recherches' => ['Étude', 'Recherche'],
+                'medias' => ['Vidéo', 'Audio', 'Infographie']
+            ];
+            
+            if (isset($tab_mapping[$active_tab]) && !in_array($pub['type'], $tab_mapping[$active_tab])) {
+                return false;
+            }
+        }
+        
+        return true;
+    });
+
+    // Trier les publications
+    usort($filtered_publications, function($a, $b) use ($sort_by, $sort_order) {
+        $result = 0;
+        
+        switch ($sort_by) {
+            case 'date':
+                $result = strtotime($a['date']) - strtotime($b['date']);
+                break;
+            case 'title':
+                $result = strcmp($a['title'], $b['title']);
+                break;
+            case 'downloads':
+                $result = $a['downloads'] - $b['downloads'];
+                break;
+            case 'rating':
+                $result = $a['rating'] - $b['rating'];
+                break;
+            default:
+                $result = 0;
+        }
+        
+        return $sort_order === 'desc' ? -$result : $result;
+    });
+
+    // Pagination
+    $total = count($filtered_publications);
+    $max_pages = ceil($total / $per_page);
+    $offset = ($page - 1) * $per_page;
+    $paginated_publications = array_slice($filtered_publications, $offset, $per_page);
+
+    // Préparer la réponse
+    $response = [
+        'publications' => $paginated_publications,
+        'total' => $total,
+        'page' => $page,
+        'perPage' => $per_page,
+        'maxPages' => $max_pages,
+        'viewMode' => $view_mode
+    ];
+
+    wp_send_json_success($response);
+}
+
+// Enregistrer les handlers AJAX pour les publications
+add_action('wp_ajax_publications_filter', 'mon_theme_aca_publications_filter_handler');
+add_action('wp_ajax_nopriv_publications_filter', 'mon_theme_aca_publications_filter_handler');
+
+/**
  * Fonction helper pour rendre la pagination avec page courante
  */
 function mon_theme_aca_render_pagination_with_current($posts_query, $pagination_type, $current_page = 1)
@@ -716,17 +925,34 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
                 $output .= '<div class="placeholder-image">' . __('Pas d\'image', 'mon-theme-aca') . '</div>';
             }
 
-            $output .= '<span class="card-date ' . esc_attr($date_color_class) . '">';
-            $output .= strtoupper(get_the_date('j M Y'));
-            $output .= '</span>';
+            // Afficher la première catégorie en badge sur l'image
+            $categories = get_the_category();
+            if (!empty($categories)) {
+                $first_category = $categories[0];
+                $output .= '<span class="card-category">' . esc_html($first_category->name) . '</span>';
+            }
+
             $output .= '</div>';
 
             $output .= '<div class="card-content">';
 
-            // Métadonnées de l'article
+            // En-tête de l'article
+            $output .= '<div class="content-header">';
+
+            // Métadonnées de l'article avec catégorie et date
             $output .= '<div class="article-meta">';
-            $output .= esc_html(get_the_date('j F Y')) . ' • ' .
-                esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
+
+            // Afficher la première catégorie du post
+            $categories = get_the_category();
+            if (!empty($categories)) {
+                $first_category = $categories[0];
+                $output .= '<span class="article-category">' . esc_html($first_category->name) . '</span> • ';
+            }
+
+            // Afficher la date de publication
+            $output .= '<span class="article-date">' . get_the_date() . '</span> • ';
+
+            $output .= esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
             $output .= '</div>';
 
             $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';
@@ -734,6 +960,11 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= '</a></h3>';
 
             $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
+
+            $output .= '</div>'; // fin content-header
+
+            // Pied de l'article 
+            $output .= '<div class="content-footer">';
 
             // Tags de l'article
             $post_tags = get_the_tags();
@@ -743,6 +974,8 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
                     $output .= '<span class="tag">#' . esc_html($tag->name) . '</span>';
                 }
                 $output .= '</div>';
+            } else {
+                $output .= '<div class="article-tags"></div>'; // div vide pour maintenir la structure
             }
 
             // Auteur de l'article
@@ -760,6 +993,8 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= '<button class="action-btn bookmark-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '"></button>';
             $output .= '</div>';
             $output .= '</div>';
+
+            $output .= '</div>'; // fin content-footer
 
             $output .= '</div>';
             $output .= '</article>';

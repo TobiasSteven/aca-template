@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/publications-hero",
+    "version": "1.0.0",
+    "title": "Publications - Hero Section",
+    "category": "mon-theme-aca",
+    "icon": "book",
+    "description": "Section d'en-tête pour la page publications avec titre et barre de recherche.",
+    "keywords": ["publications", "hero", "recherche", "bibliothèque"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Bibliothèque de Ressources Cotonnières"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "Base de connaissances spécialisée pour l'excellence de la filière cotonnière africaine"
+        },
+        "publicationsCount": {
+            "type": "string",
+            "default": "120"
+        },
+        "downloadsCount": {
+            "type": "string",
+            "default": "15K+"
+        },
+        "languagesCount": {
+            "type": "string",
+            "default": "2"
+        },
+        "searchPlaceholder": {
+            "type": "string",
+            "default": "Rechercher par titre, auteur, mots-clés..."
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "subtitleColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "iconColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

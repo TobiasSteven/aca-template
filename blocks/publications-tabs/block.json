@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/publications-tabs",
+    "version": "1.0.0",
+    "title": "Publications - Onglets",
+    "category": "mon-theme-aca",
+    "icon": "index-card",
+    "description": "Onglets de navigation pour filtrer les publications par type.",
+    "keywords": ["publications", "onglets", "navigation", "filtres"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "tabs": {
+            "type": "array",
+            "default": [
+                { "id": "tous", "label": "Tous" },
+                { "id": "rapports", "label": "Rapports" },
+                { "id": "guides", "label": "Guides" },
+                { "id": "bulletins", "label": "Bulletins" },
+                { "id": "recherches", "label": "Recherches" },
+                { "id": "medias", "label": "Médias" }
+            ]
+        },
+        "defaultActiveTab": {
+            "type": "string",
+            "default": "tous"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "borderColor": {
+            "type": "string",
+            "default": "#E9ECEF"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "activeTextColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "activeBorderColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "hoverTextColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "hoverBorderColor": {
+            "type": "string",
+            "default": "#A8E6CF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}

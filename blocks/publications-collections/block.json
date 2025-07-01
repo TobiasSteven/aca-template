@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/publications-collections",
+    "version": "1.0.0",
+    "title": "Publications - Collections",
+    "category": "mon-theme-aca",
+    "icon": "category",
+    "description": "Affiche des collections de publications regroupées par thème.",
+    "keywords": ["publications", "collections", "catégories", "ressources"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Collections Spéciales"
+        },
+        "collections": {
+            "type": "array",
+            "default": [
+                {
+                    "title": "Guide du Producteur Débutant",
+                    "description": "Ressources essentielles pour débuter dans la production cotonnière",
+                    "icon": "📚",
+                    "count": "8"
+                },
+                {
+                    "title": "Innovation dans la Filière Coton",
+                    "description": "Technologies et innovations transformant le secteur",
+                    "icon": "🔬",
+                    "count": "12"
+                },
+                {
+                    "title": "Études de Marché 2024",
+                    "description": "Analyses et tendances des marchés cotonniers",
+                    "icon": "📊",
+                    "count": "6"
+                },
+                {
+                    "title": "Ressources Durabilité",
+                    "description": "Pratiques durables et certification environnementale",
+                    "icon": "🌱",
+                    "count": "15"
+                }
+            ]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "cardBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "cardBorderColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "cardTitleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "cardTextColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "cardCountColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

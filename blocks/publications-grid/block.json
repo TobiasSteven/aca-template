@@ -1,0 +1,199 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/publications-grid",
+    "version": "1.0.0",
+    "title": "Publications - Grille",
+    "category": "mon-theme-aca",
+    "icon": "grid-view",
+    "description": "Affiche une grille de publications avec filtres et options de tri.",
+    "keywords": ["publications", "grille", "filtres", "ressources"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "blockId": {
+            "type": "string",
+            "default": ""
+        },
+        "publications": {
+            "type": "array",
+            "default": [
+                {
+                    "id": 1,
+                    "title": "Guide du Producteur de Coton Biologique 2024",
+                    "type": "Guide",
+                    "author": "ACA Research Team",
+                    "date": "2024-11-15",
+                    "language": "Français",
+                    "level": "Intermédiaire",
+                    "theme": "Production cotonnière",
+                    "description": "Guide complet pour la transition vers la production de coton biologique, incluant les techniques agricoles, la certification et la commercialisation.",
+                    "thumbnail": "https://via.placeholder.com/320x180/2D9B8A/FFFFFF?text=Guide+Bio",
+                    "fileSize": "2.5 MB",
+                    "pages": "45",
+                    "downloads": "1250",
+                    "rating": "4.8",
+                    "tags": ["Bio", "Production", "Certification"],
+                    "isNew": true
+                },
+                {
+                    "id": 2,
+                    "title": "Rapport Annuel ACA 2023",
+                    "type": "Rapport",
+                    "author": "Direction ACA",
+                    "date": "2024-03-20",
+                    "language": "Français",
+                    "level": "Expert",
+                    "theme": "Développement institutionnel",
+                    "description": "Bilan complet des activités, réalisations et perspectives de l'Association Cotonnière Africaine pour l'année 2023.",
+                    "thumbnail": "https://via.placeholder.com/320x180/28A745/FFFFFF?text=Rapport+2023",
+                    "fileSize": "8.2 MB",
+                    "pages": "120",
+                    "downloads": "890",
+                    "rating": "4.6",
+                    "tags": ["Rapport", "Bilan", "Stratégie"],
+                    "isNew": false
+                },
+                {
+                    "id": 3,
+                    "title": "Innovations Technologiques dans la Filière Coton",
+                    "type": "Étude",
+                    "author": "Dr. Jean-Baptiste Koffi",
+                    "date": "2024-10-08",
+                    "language": "Français",
+                    "level": "Expert",
+                    "theme": "Innovation",
+                    "description": "Analyse des dernières innovations technologiques et leur impact sur la productivité et la qualité dans la filière cotonnière africaine.",
+                    "thumbnail": "https://via.placeholder.com/320x180/FD7E14/FFFFFF?text=Innovation+Tech",
+                    "fileSize": "4.1 MB",
+                    "pages": "78",
+                    "downloads": "650",
+                    "rating": "4.9",
+                    "tags": ["Innovation", "Technologie", "Productivité"],
+                    "isNew": true
+                },
+                {
+                    "id": 4,
+                    "title": "Formation : Techniques de Transformation Moderne",
+                    "type": "Vidéo",
+                    "author": "Centre de Formation ACA",
+                    "date": "2024-09-12",
+                    "language": "Français",
+                    "level": "Débutant",
+                    "theme": "Transformation",
+                    "description": "Série de vidéos pédagogiques sur les techniques modernes de transformation du coton, de l'égrenage au filage.",
+                    "thumbnail": "https://via.placeholder.com/320x180/17A2B8/FFFFFF?text=Formation+Video",
+                    "fileSize": "250 MB",
+                    "duration": "2h 15min",
+                    "downloads": "420",
+                    "rating": "4.7",
+                    "tags": ["Formation", "Transformation", "Vidéo"],
+                    "isNew": false
+                },
+                {
+                    "id": 5,
+                    "title": "Étude de Marché : Coton Africain en Europe",
+                    "type": "Étude",
+                    "author": "Équipe Analyse Marchés",
+                    "date": "2024-08-30",
+                    "language": "Français",
+                    "level": "Intermédiaire",
+                    "theme": "Commercialisation",
+                    "description": "Analyse approfondie des opportunités et défis pour le coton africain sur les marchés européens, avec recommandations stratégiques.",
+                    "thumbnail": "https://via.placeholder.com/320x180/6C757D/FFFFFF?text=Marche+Europe",
+                    "fileSize": "3.8 MB",
+                    "pages": "95",
+                    "downloads": "780",
+                    "rating": "4.5",
+                    "tags": ["Marché", "Europe", "Export"],
+                    "isNew": false
+                },
+                {
+                    "id": 6,
+                    "title": "Podcast : Voix des Producteurs Africains",
+                    "type": "Audio",
+                    "author": "ACA Media",
+                    "date": "2024-11-01",
+                    "language": "Français",
+                    "level": "Débutant",
+                    "theme": "Témoignages",
+                    "description": "Série de podcasts donnant la parole aux producteurs de coton africains, leurs défis, succès et vision d'avenir.",
+                    "thumbnail": "https://via.placeholder.com/320x180/A8E6CF/FFFFFF?text=Podcast+ACA",
+                    "fileSize": "45 MB",
+                    "duration": "45min",
+                    "downloads": "320",
+                    "rating": "4.4",
+                    "tags": ["Podcast", "Témoignages", "Producteurs"],
+                    "isNew": true
+                }
+            ]
+        },
+        "documentTypes": {
+            "type": "array",
+            "default": ["Guide", "Rapport", "Étude", "Vidéo", "Audio", "Infographie"]
+        },
+        "themes": {
+            "type": "array",
+            "default": ["Production cotonnière", "Transformation", "Commercialisation", "Innovation", "Durabilité", "Formation", "Témoignages", "Développement institutionnel"]
+        },
+        "languages": {
+            "type": "array",
+            "default": ["Français", "Anglais"]
+        },
+        "levels": {
+            "type": "array",
+            "default": ["Débutant", "Intermédiaire", "Expert"]
+        },
+        "defaultViewMode": {
+            "type": "string",
+            "default": "grid"
+        },
+        "defaultSortBy": {
+            "type": "string",
+            "default": "date"
+        },
+        "defaultSortOrder": {
+            "type": "string",
+            "default": "desc"
+        },
+        "itemsPerPage": {
+            "type": "number",
+            "default": 9
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "sidebarBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "mainBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#343A40"
+        },
+        "secondaryTextColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "accentColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "cardBgColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}
