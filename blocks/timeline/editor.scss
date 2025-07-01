@@ -1,0 +1,59 @@
+/* Styles pour l'éditeur du bloc Timeline */
+
+.timeline-item-edit {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.timeline-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1F6B5C;
+}
+
+.timeline-item-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: flex-end;
+}
+
+.timeline-color-option {
+    margin-bottom: 20px;
+}
+
+.timeline-color-option label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* Styles pour améliorer l'apparence dans l'éditeur */
+.wp-block-mon-theme-aca-timeline {
+    position: relative;
+}
+
+/* Responsive fixes for the editor */
+@media (max-width: 768px) {
+    .wp-block-mon-theme-aca-timeline .flex.items-center {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .wp-block-mon-theme-aca-timeline .w-1\/2 {
+        width: 100% !important;
+        padding: 0 !important;
+        text-align: center !important;
+        margin-bottom: 20px;
+    }
+
+    .wp-block-mon-theme-aca-timeline .relative.z-10 {
+        margin: 20px 0;
+    }
+}

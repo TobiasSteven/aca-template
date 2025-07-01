@@ -1,0 +1,259 @@
+/* Styles pour le frontend du bloc Timeline */
+
+.wp-block-mon-theme-aca-timeline {
+    position: relative;
+    overflow: hidden;
+}
+
+.wp-block-mon-theme-aca-timeline .max-w-7xl {
+    max-width: 80rem;
+}
+
+.wp-block-mon-theme-aca-timeline .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-block-mon-theme-aca-timeline .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-center {
+    text-align: center;
+}
+
+.wp-block-mon-theme-aca-timeline .mb-12 {
+    margin-bottom: 3rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-3xl {
+    font-size: 1.875rem;
+}
+
+.wp-block-mon-theme-aca-timeline .font-bold {
+    font-weight: 700;
+}
+
+.wp-block-mon-theme-aca-timeline .mb-4 {
+    margin-bottom: 1rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-lg {
+    font-size: 1.125rem;
+}
+
+.wp-block-mon-theme-aca-timeline .max-w-2xl {
+    max-width: 42rem;
+}
+
+.wp-block-mon-theme-aca-timeline .relative {
+    position: relative;
+}
+
+.wp-block-mon-theme-aca-timeline .absolute {
+    position: absolute;
+}
+
+.wp-block-mon-theme-aca-timeline .left-1\/2 {
+    left: 50%;
+}
+
+.wp-block-mon-theme-aca-timeline .transform {
+    transform: translateX(-50%);
+}
+
+.wp-block-mon-theme-aca-timeline .w-1 {
+    width: 0.25rem;
+}
+
+.wp-block-mon-theme-aca-timeline .h-full {
+    height: 100%;
+}
+
+.wp-block-mon-theme-aca-timeline .space-y-12 > * + * {
+    margin-top: 3rem;
+}
+
+.wp-block-mon-theme-aca-timeline .flex {
+    display: flex;
+}
+
+.wp-block-mon-theme-aca-timeline .items-center {
+    align-items: center;
+}
+
+.wp-block-mon-theme-aca-timeline .flex-row {
+    flex-direction: row;
+}
+
+.wp-block-mon-theme-aca-timeline .flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.wp-block-mon-theme-aca-timeline .w-1\/2 {
+    width: 50%;
+}
+
+.wp-block-mon-theme-aca-timeline .pr-8 {
+    padding-right: 2rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-right {
+    text-align: right;
+}
+
+.wp-block-mon-theme-aca-timeline .pl-8 {
+    padding-left: 2rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-left {
+    text-align: left;
+}
+
+.wp-block-mon-theme-aca-timeline .bg-white {
+    background-color: #ffffff;
+}
+
+.wp-block-mon-theme-aca-timeline .p-6 {
+    padding: 1.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.wp-block-mon-theme-aca-timeline .border-l-4 {
+    border-left-width: 4px;
+}
+
+.wp-block-mon-theme-aca-timeline .text-2xl {
+    font-size: 1.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .text-xl {
+    font-size: 1.25rem;
+}
+
+.wp-block-mon-theme-aca-timeline .mb-3 {
+    margin-bottom: 0.75rem;
+}
+
+.wp-block-mon-theme-aca-timeline .z-10 {
+    z-index: 10;
+}
+
+.wp-block-mon-theme-aca-timeline .w-6 {
+    width: 1.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .h-6 {
+    height: 1.5rem;
+}
+
+.wp-block-mon-theme-aca-timeline .rounded-full {
+    border-radius: 9999px;
+}
+
+.wp-block-mon-theme-aca-timeline .border-4 {
+    border-width: 4px;
+}
+
+.wp-block-mon-theme-aca-timeline .border-white {
+    border-color: #ffffff;
+}
+
+/* Animation pour les éléments de la timeline */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.wp-block-mon-theme-aca-timeline .flex.items-center {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.wp-block-mon-theme-aca-timeline .flex.items-center:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.wp-block-mon-theme-aca-timeline .flex.items-center:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.wp-block-mon-theme-aca-timeline .flex.items-center:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.wp-block-mon-theme-aca-timeline .flex.items-center:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .wp-block-mon-theme-aca-timeline .flex.items-center {
+        flex-direction: column;
+        margin-bottom: 3rem;
+    }
+
+    .wp-block-mon-theme-aca-timeline .w-1\/2 {
+        width: 100%;
+        padding: 0 1rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .wp-block-mon-theme-aca-timeline .absolute.left-1\/2 {
+        left: 50%;
+    }
+
+    .wp-block-mon-theme-aca-timeline .relative.z-10 {
+        margin: 1rem 0;
+    }
+
+    .wp-block-mon-theme-aca-timeline .text-right,
+    .wp-block-mon-theme-aca-timeline .text-left {
+        text-align: center;
+    }
+
+    .wp-block-mon-theme-aca-timeline .pr-8,
+    .wp-block-mon-theme-aca-timeline .pl-8 {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 640px) {
+    .wp-block-mon-theme-aca-timeline .sm\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .wp-block-mon-theme-aca-timeline .md\:text-4xl {
+        font-size: 2.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .wp-block-mon-theme-aca-timeline .lg\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

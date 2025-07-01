@@ -40,6 +40,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc filtered-posts
     register_block_type(get_template_directory() . '/blocks/filtered-posts');
+    
+    // Enregistrer le bloc timeline
+    register_block_type(get_template_directory() . '/blocks/timeline');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -48,7 +51,7 @@ add_action('init', 'mon_theme_aca_register_blocks');
  */
 function mon_theme_aca_enqueue_block_assets()
 {
-    // Enqueue FontAwesome pour les icônes - works for both frontend and editor
+    // Enqueue FontAwesome for icons - works for both frontend and editor
     wp_enqueue_style(
         'fontawesome',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
@@ -93,6 +96,16 @@ function mon_theme_aca_enqueue_block_assets()
             get_template_directory_uri() . '/blocks/filtered-posts/build/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/filtered-posts/build/style-index.css')
+        );
+    }
+    
+    // S'assurer que les styles du block timeline sont chargés
+    if (has_block('mon-theme-aca/timeline')) {
+        wp_enqueue_style(
+            'mon-theme-aca-timeline-style',
+            get_template_directory_uri() . '/blocks/timeline/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/timeline/style-index.css')
         );
     }
 
@@ -243,6 +256,16 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/filtered-posts/build/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/filtered-posts/build/style-index.css')
+        );
+    }
+    
+    // Enqueue forcé des styles du block timeline
+    if (file_exists(get_template_directory() . '/blocks/timeline/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-timeline-frontend',
+            get_template_directory_uri() . '/blocks/timeline/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/timeline/style-index.css')
         );
     }
 }

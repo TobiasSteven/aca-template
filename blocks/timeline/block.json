@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/timeline",
+    "version": "1.0.0",
+    "title": "Timeline Réalisations",
+    "category": "mon-theme-aca",
+    "icon": "clock",
+    "description": "Affiche une timeline verticale des réalisations clés avec années et descriptions.",
+    "keywords": [
+        "timeline",
+        "réalisations",
+        "historique",
+        "chronologie"
+    ],
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Nos Réalisations Clés"
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": "Une décennie d'engagement pour l'excellence cotonnière"
+        },
+        "timelineItems": {
+            "type": "array",
+            "default": [
+                {
+                    "year": "2015",
+                    "title": "Lancement du Programme de Certification",
+                    "description": "Mise en place d'un système de certification pour garantir la qualité et la traçabilité du coton africain sur les marchés internationaux."
+                },
+                {
+                    "year": "2017",
+                    "title": "Création du Réseau Panafricain",
+                    "description": "Établissement d'un réseau de collaboration entre les producteurs de coton de 12 pays africains pour partager les meilleures pratiques."
+                },
+                {
+                    "year": "2019",
+                    "title": "Initiative pour un Coton Durable",
+                    "description": "Lancement d'un programme visant à promouvoir des pratiques agricoles durables et respectueuses de l'environnement."
+                },
+                {
+                    "year": "2022",
+                    "title": "Plateforme de Commerce Numérique",
+                    "description": "Développement d'une plateforme digitale facilitant les échanges commerciaux entre producteurs africains et acheteurs internationaux."
+                }
+            ]
+        },
+        "lineColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "dotColor": {
+            "type": "string",
+            "default": "#A8E6CF"
+        },
+        "yearColor": {
+            "type": "string",
+            "default": "#28A745"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}
