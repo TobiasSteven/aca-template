@@ -94,7 +94,7 @@ function mon_theme_aca_create_default_pages_and_menu() {
         'accueil' => array(
             'title' => 'Accueil',
             'template' => 'templates/template-home.php',
-            'content' => '<!-- wp:paragraph --><p>Bienvenue sur le site de l\'Association Cotonnière Africaine.</p><!-- /wp:paragraph -->'
+            'content' => ''
         ),
         'a-propos' => array(
             'title' => 'À Propos',
@@ -113,12 +113,12 @@ function mon_theme_aca_create_default_pages_and_menu() {
         ),
         'publications' => array(
             'title' => 'Publications',
-            'template' => '',
+            'template' => 'templates/template-publications.php',
             'content' => '<!-- wp:publications-hero /--><!-- wp:publications-tabs /--><!-- wp:publications-collections /--><!-- wp:publications-grid /--><!-- wp:publications-modal /-->'
         ),
         'contact' => array(
             'title' => 'Contact',
-            'template' => '',
+            'template' => 'templates/template-contact.php',
             'content' => '<!-- wp:contact-hero /--><!-- wp:contact-form /--><!-- wp:contact-sidebar /--><!-- wp:contact-offices /--><!-- wp:contact-map /-->'
         ),
     );
