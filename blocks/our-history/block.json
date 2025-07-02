@@ -1,0 +1,69 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/our-history",
+    "version": "1.0.0",
+    "title": "Notre Histoire",
+    "category": "mon-theme-aca",
+    "icon": "book-alt",
+    "description": "Affiche une section présentant l'histoire de l'organisation avec image et texte riche.",
+    "keywords": ["histoire", "présentation", "à propos", "organisation"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Notre Histoire"
+        },
+        "mainText": {
+            "type": "string",
+            "default": "Fondée en <span class=\"highlight\">2010</span>, l'Association Cotonnière Africaine (ACA) est née de la volonté commune des acteurs de la filière coton de créer une plateforme d'échange et de coopération à l'échelle continentale."
+        },
+        "quote": {
+            "type": "string",
+            "default": "\"Notre mission est de transformer la filière cotonnière africaine en un secteur d'excellence, compétitif et durable, au service du développement économique du continent.\""
+        },
+        "additionalText": {
+            "type": "string",
+            "default": "Depuis sa création, l'ACA a accompagné plus de <span class=\"highlight\">150 membres</span> dans <span class=\"highlight\">25 pays africains</span>, contribuant à l'amélioration de la qualité, de la productivité et de la durabilité de la production cotonnière."
+        },
+        "imageUrl": {
+            "type": "string",
+            "default": "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop"
+        },
+        "imageAlt": {
+            "type": "string",
+            "default": "Équipe ACA"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#343A40"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#1F6B5C"
+        },
+        "quoteColor": {
+            "type": "string",
+            "default": "#6C757D"
+        },
+        "highlightColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "quoteBorderColor": {
+            "type": "string",
+            "default": "#A8E6CF"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

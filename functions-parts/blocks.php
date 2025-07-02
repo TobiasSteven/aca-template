@@ -58,6 +58,9 @@ function mon_theme_aca_register_blocks()
     register_block_type(get_template_directory() . '/blocks/publications-collections');
     register_block_type(get_template_directory() . '/blocks/publications-grid');
     register_block_type(get_template_directory() . '/blocks/publications-modal');
+    
+    // Enregistrer le bloc our-history
+    register_block_type(get_template_directory() . '/blocks/our-history');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -153,6 +156,16 @@ function mon_theme_aca_enqueue_block_assets()
                 filemtime(get_template_directory() . '/blocks/' . $block . '/style-index.css')
             );
         }
+    }
+    
+    // S'assurer que les styles du bloc our-history sont chargés
+    if (has_block('mon-theme-aca/our-history')) {
+        wp_enqueue_style(
+            'mon-theme-aca-our-history-style',
+            get_template_directory_uri() . '/blocks/our-history/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/our-history/style-index.css')
+        );
     }
 
     // Enqueue des scripts JavaScript pour les blocs
@@ -439,6 +452,16 @@ function mon_theme_aca_force_block_styles()
             array('jquery'),
             filemtime(get_template_directory() . '/blocks/publications-tabs/view.js'),
             true
+        );
+    }
+    
+    // Enqueue forcé des styles du bloc our-history
+    if (file_exists(get_template_directory() . '/blocks/our-history/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-our-history-frontend',
+            get_template_directory_uri() . '/blocks/our-history/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/our-history/style-index.css')
         );
     }
 }
