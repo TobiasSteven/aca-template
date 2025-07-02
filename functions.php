@@ -21,6 +21,7 @@ require_once MON_THEME_ACA_DIR . '/functions-parts/menu-filters.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/events.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/blocks.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/theme-includes.php';
+require_once MON_THEME_ACA_DIR . '/inc/class-mon-theme-aca-nav-walker.php';
 
 /**
  * Ensure threaded comments are enabled
