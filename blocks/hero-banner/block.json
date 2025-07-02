@@ -1,0 +1,73 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/hero-banner",
+    "version": "1.0.0",
+    "title": "Hero Banner",
+    "category": "mon-theme-aca",
+    "icon": "cover-image",
+    "description": "Bannière d'en-tête avec image de fond, texte et ligne décorative.",
+    "keywords": ["hero", "banner", "header", "entête"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "height": {
+            "type": "string",
+            "default": "400px"
+        },
+        "backgroundImage": {
+            "type": "string",
+            "default": "https://images.pexels.com/photos/2132250/pexels-photo-2132250.jpeg?auto=compress&cs=tinysrgb&w=1920&h=400&fit=crop"
+        },
+        "overlayColor": {
+            "type": "string",
+            "default": "#2D9B8A"
+        },
+        "overlayOpacity": {
+            "type": "number",
+            "default": 0.7
+        },
+        "overlayGradient": {
+            "type": "boolean",
+            "default": true
+        },
+        "title": {
+            "type": "string",
+            "default": "L'Association Cotonnière Africaine"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "Fédérer, Promouvoir, Développer"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "subtitleColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "lineColor": {
+            "type": "string",
+            "default": "#A8E6CF"
+        },
+        "lineWidth": {
+            "type": "string",
+            "default": "24px"
+        },
+        "lineHeight": {
+            "type": "string",
+            "default": "4px"
+        },
+        "textAlignment": {
+            "type": "string",
+            "default": "center"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

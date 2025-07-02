@@ -61,6 +61,9 @@ function mon_theme_aca_register_blocks()
     
     // Enregistrer le bloc our-history
     register_block_type(get_template_directory() . '/blocks/our-history');
+    
+    // Enregistrer le bloc hero-banner
+    register_block_type(get_template_directory() . '/blocks/hero-banner');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -165,6 +168,16 @@ function mon_theme_aca_enqueue_block_assets()
             get_template_directory_uri() . '/blocks/our-history/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/our-history/style-index.css')
+        );
+    }
+    
+    // S'assurer que les styles du bloc hero-banner sont chargés
+    if (has_block('mon-theme-aca/hero-banner')) {
+        wp_enqueue_style(
+            'mon-theme-aca-hero-banner-style',
+            get_template_directory_uri() . '/blocks/hero-banner/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/hero-banner/style-index.css')
         );
     }
 
@@ -462,6 +475,16 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/our-history/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/our-history/style-index.css')
+        );
+    }
+    
+    // Enqueue forcé des styles du bloc hero-banner
+    if (file_exists(get_template_directory() . '/blocks/hero-banner/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-hero-banner-frontend',
+            get_template_directory_uri() . '/blocks/hero-banner/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/hero-banner/style-index.css')
         );
     }
 }
